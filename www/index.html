@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy" content="media-src * mediastream:">
+
+    <script src="components/loader.js"></script>
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    
+    <script src="js/vendor/tquery/tquery-bundle.js"></script>
+    <script src="js/vendor/tquery/tquery.minecraftchar.js"></script>
+    
+    <script src="js/vendor/js-aruco/jkl-dumper.js"></script>
+    <script src="js/vendor/js-aruco/polyfill.js"></script>
+    <script src="js/vendor/js-aruco/cv.js"></script>
+    <script src="js/vendor/js-aruco/aruco.js"></script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk8O_KcLYssgRH7a06qm1Pi5A9tIlZs_E&sensor=false"></script>
+    <script src="js/GoogleMap.js"></script>
+    <script src="js/Avatar.js"></script>
+    <script src="js/AR.js"></script>
+    <script src="js/CameraView.js"></script>
+    <script src="js/index.js"></script>
+
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .fab, .fab:active {
+            background-color: #00AACC;
+        }
+        
+        .gm-style > div:first-child {
+            z-index: 10000000 !important;
+        }
+        
+        #page-change-avatar div.page__background {
+            background: transparent;
+            background-color: rgba(0,0,0,0);
+        }
+        #page-change-avatar ons-list-item.list__item {
+            line-height: 30px;
+            min-height: 30px;
+        }
+        #page-change-avatar div.list__item__center {
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <ons-navigator id="navi">
+        <ons-page style="position:absolute; top:0; right:0; bottom:0; left:0;">
+            <img src="images/loading.gif" style="width:100px; height:100px; position:absolute; top:50%; left:50%; margin:-50px 0 0 -50px;" />
+        </ons-page>
+    </ons-navigator>
+    
+    <ons-template id="home.html">
+        <ons-page id="page-home">
+            <div id="map-canvas" style="width:100%; height:100%;"></div>
+            <div id="avatar-canvas" style="position: absolute; z-index: 10000001;"></div>
+            <ons-speed-dial id="floating-gear" position="left bottom">
+                <ons-fab>
+                    <ons-icon icon="fa-cog"></ons-icon>
+                </ons-fab>
+                <ons-speed-dial-item>
+                    <ons-icon icon="fa-user" onclick="modalChangeAvatar();"></ons-icon>
+                </ons-speed-dial-item>
+            </ons-speed-dial>
+        </ons-page>
+    </ons-template>
+    
+    <ons-template id="camera.html">
+        <ons-page id="page-camera">
+            <div>
+                <video id="video" autoplay="true" style="display:none;"></video>
+                <canvas id="cameraview-canvas" style="position:absolute; z-index:-1; top:0px; left:0px;"></canvas>
+            </div>
+            <div style="display:none;">
+                <img id="monster-f1" src="images/monster/frame-1.gif" />
+                <img id="monster-f2" src="images/monster/frame-2.gif" />
+                <img id="monster-f3" src="images/monster/frame-3.gif" />
+                <img id="monster-f4" src="images/monster/frame-4.gif" />
+                <img id="monster-f5" src="images/monster/frame-5.gif" />
+                <img id="monster-f6" src="images/monster/frame-6.gif" />
+                <img id="monster-f7" src="images/monster/frame-7.gif" />
+                <img id="monster-f8" src="images/monster/frame-8.gif" />
+                <img id="monster-f9" src="images/monster/frame-9.gif" />
+            </div>
+            <ons-fab position="bottom left">
+                <ons-icon icon="fa-times" onclick="navi.popPage({animation: 'fade'});"></ons-icon>
+            </ons-fab>
+        </ons-page>
+    </ons-template>
+    
+    <ons-modal id="change-avatar">
+        <ons-page id="page-change-avatar">
+            <ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/char.png');">Default</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/3djesus.png');">3D Jesus</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/agentsmith.png');">Agentsmith</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/batman.png');">Batman</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/god.png');">God</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/jamesbond-1.png');">Jamesbond</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/Joker.png');">Joker</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/Mario.png');">Mario</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/martialartist.png');">Martialartist</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/robocop.png');">Robocop</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/Sonicthehedgehog.png');">Sonic the hedgehog</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/Spiderman.png');">Spiderman</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/Superman.png');">Superman</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/theflash.png');">The Flash</ons-list-item>
+                <ons-list-item tappable onclick="changeAvatar('images/avatar/woody.png');">Woody</ons-list-item>
+            </ons-list-item>
+        </ons-page>
+    </ons-modal>
+</body>
+</html>
