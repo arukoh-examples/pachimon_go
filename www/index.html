@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <meta http-equiv="Content-Security-Policy" content="media-src * mediastream:">
 
     <script src="components/loader.js"></script>
     <script src="lib/onsenui/js/onsenui.min.js"></script>
@@ -28,39 +27,19 @@
     <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .fab, .fab:active {
-            background-color: #00AACC;
-        }
-        
-        .gm-style > div:first-child {
-            z-index: 10000000 !important;
-        }
-        
-        #page-change-avatar div.page__background {
-            background: transparent;
-            background-color: rgba(0,0,0,0);
-        }
-        #page-change-avatar ons-list-item.list__item {
-            line-height: 30px;
-            min-height: 30px;
-        }
-        #page-change-avatar div.list__item__center {
-            min-height: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <ons-navigator id="navi">
-        <ons-page style="position:absolute; top:0; right:0; bottom:0; left:0;">
-            <img src="images/loading.gif" style="width:100px; height:100px; position:absolute; top:50%; left:50%; margin:-50px 0 0 -50px;" />
+        <ons-page id="page-loading">
+            <img src="images/loading.gif" />
         </ons-page>
     </ons-navigator>
     
     <ons-template id="home.html">
         <ons-page id="page-home">
-            <div id="map-canvas" style="width:100%; height:100%;"></div>
-            <div id="avatar-canvas" style="position: absolute; z-index: 10000001;"></div>
+            <div id="map-canvas"></div>
+            <div id="avatar-canvas"></div>
             <ons-speed-dial id="floating-gear" position="left bottom">
                 <ons-fab>
                     <ons-icon icon="fa-cog"></ons-icon>
@@ -75,8 +54,8 @@
     <ons-template id="camera.html">
         <ons-page id="page-camera">
             <div>
-                <video id="video" autoplay="true" style="display:none;"></video>
-                <canvas id="cameraview-canvas" style="position:absolute; z-index:-1; top:0px; left:0px;"></canvas>
+                <video id="video" autoplay="true"></video>
+                <canvas id="cameraview-canvas"></canvas>
             </div>
             <div style="display:none;">
                 <img id="monster-f1" src="images/monster/frame-1.gif" />

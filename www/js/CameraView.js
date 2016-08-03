@@ -6,7 +6,6 @@ CameraView = function(video, canvas, detect) {
     this.context = canvas.getContext("2d");
     this.detect = detect;
     this.stream;
-    this.selected = 1;
     
     function tick() {
         requestAnimationFrame(tick);

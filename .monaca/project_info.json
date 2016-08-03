@@ -18,12 +18,5 @@
         "cordova-plugin-geolocation@1.0.1",
         "cordova-plugin-crosswalk-webview@1.3.1",
         "cordova-plugin-device-orientation@1.0.1"
-    ],
-    "title-ja": "",
-    "title-en": "",
-    "description-ja": "",
-    "description-en": "",
-    "category": "User Template",
-    "platform": [],
-    "name": "generated-1469347903-57935ee77e2193a50dbc8612"
+    ]
 }

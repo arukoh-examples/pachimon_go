@@ -47,6 +47,7 @@ function drawCorners(context, markers) {
         }
         context.stroke();
         context.closePath();
+        
         context.strokeStyle = "green";
         context.strokeRect(corners[0].x - 2, corners[0].y - 2, 4, 4);
     }

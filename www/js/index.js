@@ -13,7 +13,6 @@ ons.ready(function() {
         var page = event.target;
         
         if (page.id === 'page-home') {
-            console.log("init page-home!");
             var mapCanvas = document.getElementById('map-canvas');
             
             var mapOptions = googleMapOptions(initLatLng[0], initLatLng[1]);
@@ -28,10 +27,9 @@ ons.ready(function() {
             var avatar = document.getElementById('avatar-canvas');
             avatar.style.top = (page.offsetHeight - avatarH*2).toString() + "px";
             avatar.style.left = ((page.offsetWidth - avatarW)/2).toString() + "px";
-            setupAvatar(avatar, avatarH, avatarW);
+            setupAvatar(avatar, avatarH, avatarW, 'images/avatar/char.png');
         }
         if (page.id === 'page-camera') {
-            console.log("init page-camera!");
             var video = document.getElementById("video");
             var cameraview = document.getElementById("cameraview-canvas");
             cameraview.width = page.offsetWidth;
@@ -73,9 +71,7 @@ ons.ready(function() {
     
     watchCompassID = navigator.compass.watchHeading(
         function(heading) {
-            if (avatar !== null) {
-                avatar.model.rotation(0, Math.PI * (180 - heading.magneticHeading) / 180, 0);
-            }
+            rotateAvatar(0, Math.PI * (180 - heading.magneticHeading) / 180, 0);
         },
         function(e) {
             console.log('code: ' + error.code + ', message: ' + error.message);
@@ -87,7 +83,9 @@ function newGreenLeaf(map) {
     var latlng = map.getCenter();
     var lat = latlng.lat() + getRandomArbitary(-0.00035, 0.0004);
     var lng = latlng.lng() + getRandomArbitary(-0.00035, 0.00035);
-    greenLeaf = new google.maps.Marker(googleMapMarkerOptions(map, lat, lng));
+    var image = 'images/FallingGreenleaves.gif';
+    var marker = googleMapMarkerOptions(map, lat, lng, image);
+    greenLeaf = new google.maps.Marker(marker);
     greenLeaf.addListener('click', function() {
         greenLeaf.setMap(null);
         greenLeaf = null;

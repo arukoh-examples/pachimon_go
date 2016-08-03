@@ -1,16 +1,14 @@
 var avatar = null;
 
-function setupAvatar(canvas, avatarH, avatarW) {
+function setupAvatar(canvas, avatarH, avatarW, skin) {
     var world = tQuery.createWorld().boilerplate({stats: false, cameraControls: false}).start();
     world.appendTo(canvas);
     world.tCamera().position.z = 1.8;
     
-    world.tRenderer().setClearColor( 0xffffff, 0);
+    world.tRenderer().setClearColor(0xffffff, 0);
     world.tRenderer().setSize(avatarW, avatarH);
     
-    //world.addEffectComposer().vignette().finish();
-    
-    avatar = new tQuery.MinecraftChar({ skinUrl: 'images/avatar/char.png'});
+    avatar = new tQuery.MinecraftChar({ skinUrl: skin});
     avatar.model.addTo(world);
     
     world.loop().hook(function(delta, now) {
@@ -26,13 +24,19 @@ function setupAvatar(canvas, avatarH, avatarW) {
         avatar.parts.headGroup.rotation.y = Math.sin(now)/3;
     });
 }
-            
+
+function rotateAvatar(x, y, z) {
+    if (avatar !== null) {
+        avatar.model.rotation(x, y, z);
+    }
+}
+
 function modalChangeAvatar() {
     document.getElementById('floating-gear').hideItems();
     document.getElementById('change-avatar').show({animation: 'fade'});
 }
 
-function changeAvatar(value) {
-    avatar.loadSkin(value);
+function changeAvatar(skin) {
+    avatar.loadSkin(skin);
     document.getElementById('change-avatar').hide({animation: 'fade'});
 }

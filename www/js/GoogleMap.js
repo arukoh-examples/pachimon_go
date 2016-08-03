@@ -80,11 +80,11 @@ function googleMapStyledMapType(name) {
     return new google.maps.StyledMapType(styleOptions, { name: name });
 };
 
-function googleMapMarkerOptions(map, lat, lng) {
+function googleMapMarkerOptions(map, lat, lng, image) {
     return {
         position: new google.maps.LatLng(lat, lng),
         map: map,
-        icon: new google.maps.MarkerImage('images/FallingGreenleaves.gif'),
+        icon: new google.maps.MarkerImage(image),
         animation: google.maps.Animation.BOUNCE
     };
 };
