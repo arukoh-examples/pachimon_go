@@ -16,7 +16,7 @@
     <script src="js/vendor/js-aruco/cv.js"></script>
     <script src="js/vendor/js-aruco/aruco.js"></script>
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="js/GoogleMap.js"></script>
     <script src="js/Avatar.js"></script>
     <script src="js/AR.js"></script>
@@ -76,7 +76,9 @@
     
     <ons-modal id="change-avatar">
         <ons-page id="page-change-avatar">
-            <ons-list-item>
+            <ons-toolbar><div class="center">User Settings</div></ons-toolbar>
+            <ons-list>
+                <ons-list-header>Avatar Skins</ons-list-header>
                 <ons-list-item tappable onclick="changeAvatar('images/avatar/char.png');">Default</ons-list-item>
                 <ons-list-item tappable onclick="changeAvatar('images/avatar/3djesus.png');">3D Jesus</ons-list-item>
                 <ons-list-item tappable onclick="changeAvatar('images/avatar/agentsmith.png');">Agentsmith</ons-list-item>
@@ -92,7 +94,7 @@
                 <ons-list-item tappable onclick="changeAvatar('images/avatar/Superman.png');">Superman</ons-list-item>
                 <ons-list-item tappable onclick="changeAvatar('images/avatar/theflash.png');">The Flash</ons-list-item>
                 <ons-list-item tappable onclick="changeAvatar('images/avatar/woody.png');">Woody</ons-list-item>
-            </ons-list-item>
+            </ons-list>
         </ons-page>
     </ons-modal>
 </body>
